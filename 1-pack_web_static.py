@@ -12,7 +12,8 @@ def do_pack():
     """compress the web_static folder"""
     try:
         timestamp = time.strftime("%Y%m%d%H%M%S")
-        local("mkdir -p versions")
+        if isdir("versions") is False:
+            local("mkdir versions")
         archived_folder = f"versions/web_static_{timestamp}.tgz"
         local(f"tar -cvzf {archived_folder} web_static/")
 
