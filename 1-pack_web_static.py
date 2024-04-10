@@ -6,7 +6,7 @@ Author: Bismark-K
 """
 import time
 from fabric.api import local
-from os.path import isdir
+from os.path import isdir, exists
 
 
 def do_pack():
@@ -15,6 +15,8 @@ def do_pack():
         timestamp = time.strftime("%Y%m%d%H%M%S")
         if isdir("versions") is False:
             local("mkdir versions")
+            if not exists("versions"):
+                raise Exception("Versions folder not created")
         archived_folder = f"versions/web_static_{timestamp}.tgz"
         local(f"tar -cvzf {archived_folder} web_static/")
 
