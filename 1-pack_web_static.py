@@ -6,6 +6,7 @@ Author: Bismark-K
 """
 import time
 from fabric.api import local
+from os.path import isdir
 
 
 def do_pack():
