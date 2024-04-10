@@ -17,7 +17,8 @@ def do_pack():
         return the archive path if archive has generated correctly.
     """
 
-    local("mkdir -p versions")
+    if isdir("versions") is False:
+        local("mkdir versions")
     date = datetime.now().strftime("%Y%m%d%H%M%S")
     loc_archived_path = "versions/web_static_{}.tgz".format(date)
     zipped_archive = local("tar -cvzf {} web_static".format(loc_archived_path))

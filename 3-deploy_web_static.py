@@ -14,7 +14,8 @@ env.hosts = ['100.24.74.244', '100.26.225.2']
 def do_pack():
     """Generate an tgz archive from web_static folder"""
     try:
-        local("mkdir -p versions")
+        if isdir("versions") is False:
+            local("mkdir versions")
         timestamp = time.strftime("%Y%m%d%H%M%S")
         archived_folder = f"versions/web_static_{timestamp}.tgz web_static/"
         local(f"tar -cvzf {archived_folder}.tgz web_static/")
